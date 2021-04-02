@@ -7,6 +7,7 @@ import SearchResults from './SearchResults';
 export const Main = () => {
   const [artist, setArtist] = useState('');
   const [searchResults, setSearchResults] = useState({});
+
   
   const limit = 10;
 
@@ -26,15 +27,16 @@ export const Main = () => {
         setSearchResults(response);
       });
     };
-    getArtists();
+    setTimeout(()=>{
+      getArtists();
+    }, 500)
+    
   }, [artist]);
 
   return (
       <main className="Main">
         <SearchForm getArtist={setArtist} />
-        {/* <p>artist: {JSON.stringify(artist)}</p> */}
         <SearchResults searchResults={searchResults} limit={limit} />
-        {/* <p>searchResults: {JSON.stringify(searchResults)}</p> */}
       </main>
   )
 };

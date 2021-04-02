@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 
 export const ExpanderIcon = ({isOpen}) => {
@@ -6,14 +6,12 @@ return <span className='ExpanderIcon'>{isOpen ? '-' : '+'}</span>;
 }
 
 
-export const Expander = ({label,content,id}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  function handleLinkClick() {
-    setIsOpen(!isOpen)
-  }
+export const Expander = ({label, content, id, isOpen, handler}) => {
   return <div className='Expander'>
-    <button className='ExpanderLabel' onClick={handleLinkClick}>{label}<ExpanderIcon isOpen={isOpen} /></button>
-    <div className='ExpanderContent' style={{display: `${isOpen ? 'block':'none'}`}}>{JSON.stringify(content)}</div>
+    <button className='ExpanderLabel' onClick={handler}>{label}<ExpanderIcon isOpen={isOpen} /></button>
+    <div className='ExpanderContent' style={{display: `${isOpen ? 'block':'none'}`}}>{content.map(({title=''},i)=>{
+      return <div key={i}>{title}</div>
+    })}</div>
 
   </div>;
 };
