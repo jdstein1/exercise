@@ -1,42 +1,38 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import NB from 'nodebrainz';
 
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 
 export const Main = () => {
   const [artist, setArtist] = useState('');
-  console.log('artist: ', artist);
   const [searchResults, setSearchResults] = useState({});
-  console.dir(searchResults);
-
   
   const limit = 10;
-  const offset = 0;
-  const searchString = new URLSearchParams(`query=${artist}&limit=${limit}&offset=${offset}`)
-
-  const url = `https://musicbrainz.org/ws/2/artist?${searchString}`;
-  // search:   /<ENTITY_TYPE>?query=<QUERY>&limit=<LIMIT>&offset=<OFFSET>
-
 
   useEffect(() => {
-  async function fetchData() {
-    // You can await here
-    const response = await axios.get(url);
-    const {data={}} = response;
-    setSearchResults(data);
-  }
-  if (artist!=='') {
-    fetchData();
-  } else {
-    console.log('no data');
-  }
-  }, [artist,url]);
+
+    const nb = new NB({userAgent: 'DiscogApp/0.0.1'})
+
+    const getArtists = async () => {
+
+      const payload = { artist, limit };
+      await nb.search('artist', payload, (err, response) => {
+        if (err) {
+          console.log('err: ', err);
+          // return err;
+        }
+        console.log('response: ', response);
+        setSearchResults(response);
+      });
+    };
+    getArtists();
+  }, [artist]);
 
   return (
       <main className="Main">
         <SearchForm getArtist={setArtist} />
-        <p>artist: {JSON.stringify(artist)}</p>
+        {/* <p>artist: {JSON.stringify(artist)}</p> */}
         <SearchResults searchResults={searchResults} limit={limit} />
         {/* <p>searchResults: {JSON.stringify(searchResults)}</p> */}
       </main>

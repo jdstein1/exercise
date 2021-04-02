@@ -3,16 +3,15 @@ import React from 'react';
 export const SearchForm = ({getArtist}) => {
   function handleSearchChange(e) {
     console.log('e.target.value: ',e.target.value);
+    e.preventDefault();
+
     getArtist(e.target.value);
-  }
-  function handleSubmit(form) {
-    console.log('form: ',form);
+    return null;
   }
   return (
-      <form onSubmit={handleSubmit}>
-        <input onChange={handleSearchChange} className="Search" type="text" id="music" placeholder="search music artists..."/>
-        <input type="submit"/>
-      </form>
+      <div className='SearchForm'>
+        <input onChange={handleSearchChange} className="SearchInput" type="text" id="music" placeholder="search music artists..."/>
+      </div>
   )
 };
 
