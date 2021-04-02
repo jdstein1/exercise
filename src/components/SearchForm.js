@@ -2,9 +2,6 @@ import React from 'react';
 
 export const SearchForm = ({getArtist}) => {
   function handleSearchChange(e) {
-    console.log('e.target.value: ',e.target.value);
-    e.preventDefault();
-
     getArtist(e.target.value);
     return null;
   }

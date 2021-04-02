@@ -23,7 +23,6 @@ export const Main = () => {
           console.log('err: ', err);
           // return err;
         }
-        console.log('response: ', response);
         setSearchResults(response);
       });
     };
