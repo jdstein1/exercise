@@ -18,3 +18,12 @@
   font-size: 2em;
   padding: 0.5em;
 }
+
+.ResultsList {
+  list-style-type: none;
+  text-align: left;
+}
+
+.ResultsListItem {
+  text-align: left;
+}
