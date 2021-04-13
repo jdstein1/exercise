@@ -48,7 +48,7 @@ export const SearchResultsList = ({artists, limit, offset}) => {
 };
 
 
-export const SearchResults = ({searchResults=[], limit=0}) => {
+export const SearchResults = ({searchResults={}, limit=0}) => {
   const {artists=[], count=0, offset=0} = searchResults;
   return (
         <section className='SearchResults'>

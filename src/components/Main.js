@@ -7,7 +7,6 @@ import SearchResults from './SearchResults';
 export const Main = () => {
   const [artist, setArtist] = useState('');
   const [searchResults, setSearchResults] = useState({});
-
   
   const limit = 10;
 
